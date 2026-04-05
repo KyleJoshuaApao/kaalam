@@ -34,23 +34,22 @@ Kaalaman is an experimental AI-powered study system designed around a context-fi
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    U[Student User] --> UI[Next.js Client Interface]
-    UI --> UPLOAD[/POST api/upload/]
-    UI --> CHAT[/POST api/chat/]
-    UI --> SPEECH[Speech Recognition / Speech Synthesis]
-    UPLOAD --> PARSE[PDF / DOCX / TXT / MD Extraction]
-    PARSE --> CLEAN[Normalization + Truncation]
-    CLEAN --> CONTEXT[(Study Context)]
-    CHAT --> MODE[Mode Instruction Router]
-    MODE --> PROMPT[Prompt Assembly]
-    CONTEXT --> PROMPT
-    PROMPT --> OPENAI[OpenAI API]
-    MODE --> LITE[Lite Mode Heuristics]
-    OPENAI --> RESPONSE[Study Response]
-    LITE --> RESPONSE
-    RESPONSE --> UI
+```text
+Student User
+  -> Next.js Client Interface
+     -> /api/upload
+        -> PDF / DOCX / TXT / MD extraction
+        -> normalization and truncation
+        -> study context
+     -> /api/chat
+        -> mode instruction router
+        -> prompt assembly + uploaded context
+        -> OpenAI API
+        -> AI response
+     -> Lite Mode heuristics
+        -> local summary / quiz / explanation / translation
+     -> speech recognition / speech synthesis
+  -> rendered study response
 ```
 
 ## Core Capabilities
